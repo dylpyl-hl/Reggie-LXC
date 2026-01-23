@@ -1,60 +1,57 @@
-# 🤖 Reggie AI: The Living ASCII Companion
-**A playful, expressive, distributed AI face for Proxmox.**
+# Reggie - Proxmox integrated AI
+****Basically, I made my server talk and gave it a face.**
 
-Reggie is an animated companion for your home lab. He visualizes AI processing and system states using a living ASCII character.
+This is my first real project. I wanted to run a local AI that could actually talk to me, so I set up Ollama and Piper in a Proxmox container. But, instead of just having a boring terminal, I gave it an animated ASCII face that shows up on my actual server monitor.
 
-Rather than showing logs and terminal text, Reggie shows state, mood, and intent, giving your server node a friendly, readable presence.
+Rather than showing logs and terminal text, you can see state, mood, and intent this way. Reggie's "brain" runs inside a Debian container, while his "face" displays directly on my Proxmox host's physical screen on my mini rack.
 
 ![Reggie Desktop Screenshot](https://raw.githubusercontent.com/YOUR_USER/REGGIE/main/resources/screenshot.png)
 <br><br>
 
 
 ## What Reggie Does
-Originally, I developed Reggie because I wanted to know if my Proxmox container was actually listening to me or just hanging. I wanted visual feedback to see when he was "thinking" and when he was "speaking." Since then, Reggie has grown into a personality-driven head that can reflect different moods based on your interactions.
+Reggie isn't some fancy control panel or dashboard.
+He's basically:
+
+A desktop buddy for your homelab
+A way to see what your AI is doing at a glance
+A fun way to make a "headless" server not headless anymore lol
 <br><br>
 
 
 ## Design Philosophy
-Reggie is not a control panel.
-
-He is:
-- A companion for your rack/desk
-- A status glance for your LLM
-- A playful way to visualize a "headless" server.
+I had this extra monitor sitting around and wanted to use it to display my AI somehow, but I didn't want it to just be another boring terminal with scrolling text. I thought it was a cool idea to actually see when the AI was thinking versus when it was talking back to me.
+I kind of wanted it to be something like Eddy from Lab rats xd.
 
 ![ASCII Face Concepts](https://raw.githubusercontent.com/YOUR_USER/REGGIE/main/resources/faces-preview.png)
 
 Perfect for:
-- Proxmox Host monitors
-- Secondary server displays
-- Dedicated tty screens
+- Monitors connected to your Proxmox host
+- Extra displays you have lying around
+- That old screen you wanted to do something with
 <br><br>
 
 
-## Installation
-- Run the `setup_host.sh` on your Proxmox Host.
-- Map your `/dev/snd` devices to your LXC container.
-- Deploy `ai_control.py` inside your container.
-- Configure your Host IP in the script.
+## Setup
+1. Run setup_host.sh on your Proxmox host
+2. Pass your sound devices (/dev/snd) through to your LXC container
+3. Put ai_control.py inside your container, ai_face.py on your proxmox shell. 
+Edit the script with your host's IP address
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <br><br>
 
 
 ## State & Logic Control
-Reggie works by monitoring "flag files" in the `/tmp` directory of the host. The Brain (Container) pushes these flags via SSH to drive Reggie's expressions directly.
+The way Reggie shows emotions is pretty simple. he looks for "flag files" in the /tmp folder. The AI container creates these files over SSH to tell Reggie what to do.
 
-Use `set_remote_state("thinking")` to trigger calculation faces. Use `set_remote_state("talking")` to trigger speech animations.
+When Ollama is processing your question → call `set_remote_state("thinking")`  → Reggie looks like he's thinking
+When Piper is reading the response out loud → call  `set_remote_state("talking")` → Reggie's mouth moves
 
 Typical uses:
 - Trigger **thinking** moods while Ollama processes text.
 - Reflect **talking** states while Piper TTS is active.
 - Automated **blinking** and idle micro-expressions.
 <br><br>
-
-
-## Entities and States
-This table shows the various faces Reggie can make and what triggers them.
 
 ### Face States
 | State | Trigger | Expression |
@@ -64,29 +61,22 @@ This table shows the various faces Reggie can make and what triggers them.
 | `talking` | `/tmp/ai_talking` exists | Rapidly alternating open/closed mouths. |
 | `happy` | 1% random idle chance | Wide-eyed smile. |
 
+<br><br>
+
 ### System Commands
 | Command | Purpose |
 | --- | --- |
 | `pkill -f ai_face.py` | Terminate the face process safely. |
 | `startx` | Refresh the display and restart Openbox. |
 | `skill` | Older "one-word" command for process management. |
+
+
+## W.I.P project
+Reggie is currently under development
+
+**ideas for the future**
+- emotions based on your system health
+- Having Reggie react to the mood of the AI's responses
 <br><br>
 
 
-## Roadmap
-Reggie is currently under active development.
-
-**Coming Soon:**
-- Volume-peak detection for synchronized mouth movement.
-- "Sore throat" auto-fix for audio permissions.
-- Emotional integration with LLM sentiment analysis.
-<br><br>
-
-
-## License
-Reggie is licensed under the "MIT License."
-<br><br>
-
-
-## Support Reggie
-If you find Reggie useful, please consider giving the repo a ⭐ to support the work!<br>
