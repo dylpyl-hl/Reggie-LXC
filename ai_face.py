@@ -76,8 +76,6 @@ import os
 import time
 import random
 
-# ... [Your faces dictionary stays here] ...
-
 def render(face_type):
     # I originally used os.system('clear'), but found that \033[H\033[J is faster as it avoids spawning a new process
     print("\033[H\033[J", end="")
@@ -87,7 +85,7 @@ def render(face_type):
 
 print("Starting AI Face... Press Ctrl+C to stop.")
 
-# State Variables
+# state variables
 last_blink = time.time()
 blink_interval = random.uniform(3, 6)
 
