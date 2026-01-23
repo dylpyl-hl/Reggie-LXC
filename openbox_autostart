@@ -1,0 +1,10 @@
+# disable screen sleep
+xset s off
+xset -dpms
+xset s noblank
+
+x-terminal-emulator -e python3 /root/ai_face.py &
+
+xterm -fullscreen -bg black -fg white -fa 'Monospace' -fs 30 -e python3 /root/ai_face.py &
+
+unclutter -idle 2 -root &
