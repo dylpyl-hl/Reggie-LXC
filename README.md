@@ -42,9 +42,15 @@ Perfect for:
 4. Put ai_control.py inside your container & ai_face.py on your proxmox shell. 
 Edit the script with your host's IP address
 
-/
+> **IMPORTANT:**  
+> Reggie's size depends on your monitor and font size. If he looks weird or off-center, open `ai_face.py` and find this line: `print(line.center(50))`. Change the `50` to match your screen width:  
+> Small screen, try 40 | Normal screen, try 80 | Big screen, try 100 or 120. Just mess with the number until Reggie looks centered!
+
+<br>
+
 <img width="1045" height="137" alt="Image" src="https://github.com/user-attachments/assets/87c2fcf2-7b21-4948-aa54-5a012fcbdb67" />
-/
+
+<br>
 
 ## State & Logic Control
 The way Reggie shows emotions is pretty simple. he looks for "flag files" in the /tmp folder. The AI container creates these files over SSH to tell Reggie what to do.
