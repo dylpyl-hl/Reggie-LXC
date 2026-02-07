@@ -1,6 +1,6 @@
 # R.E.G.G.I.E- Proxmox integrated AI
 
-****Basically, I made my server talk and gave it a face.**   
+****kinda simple just made my server talk and gave it a face.**   
 
 This is my first real project. I wanted to run a local AI that could actually talk to me, so I set up Ollama and Piper in a Proxmox container. But, instead of just having a boring terminal, I gave it an animated ASCII face that shows up on my actual server monitor.
 
